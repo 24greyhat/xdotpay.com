@@ -1,0 +1,11 @@
+from django.contrib import admin
+from .models import Account
+
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_filter = ["username", "email", "first_name", "last_name"]
+
+    filter_input_length = {
+        "username": 30
+    }
