@@ -1,1 +1,9 @@
 django-ninja
+python-decouple
+django-cors-headers
+web3
+django-jazzmin
+djangorestframework
+django-filter
+markdown
+pydantic
