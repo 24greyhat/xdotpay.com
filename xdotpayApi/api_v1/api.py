@@ -16,8 +16,7 @@ router = Router()
 w3 = Web3(Web3.HTTPProvider(env_config("ETH_RPC", cast=str)))
 
 
-ROUTER_ADDRESS = Web3.to_checksum_address(
-    env_config("ROUTER_ADDRESS", cast=str))
+ROUTE_ADDRESS = "0x273c4e1584A001E2D849Aca43975244422F48224"
 
 
 @router.post("/new/invoice", tags=["PAYMENT GATEWAY"], auth=Auth(), response=ViewInvoiceSchema)
