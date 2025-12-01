@@ -13,7 +13,7 @@ class PaymentStatus(models.TextChoices):
 class Invoice(models.Model):
 
     # metadata -> product name, qty etc...
-    metadata = models.JSONField(default=lambda: {}, blank=True, null=True)
+    metadata = models.JSONField(default={}, blank=True, null=True)
     from_address = models.TextField(default="", blank=True, null=True)
     tx_hash = models.TextField(max_length=100, null=True, blank=True)
     merchant = models.ForeignKey(Account, on_delete=models.DO_NOTHING)

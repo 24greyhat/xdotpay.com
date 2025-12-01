@@ -8,8 +8,6 @@ class SignupSchema(Schema):
     email: str
     merchant_address: str
     username: str
-    first_name: str
-    last_name: str
     password: str
 
 
@@ -23,8 +21,6 @@ class AccountSchema(Schema):
     email: str
     username: str
     merchant_address: str
-    first_name: str
-    last_name: str
     created_at: datetime.datetime
     updated_at: datetime.datetime
 
@@ -34,8 +30,6 @@ class ViewAccountSchema(Schema):
     merchant_address: str
     email: str
     username: str
-    first_name: str
-    last_name: str
     created_at: datetime.datetime
     updated_at: datetime.datetime
 
@@ -44,6 +38,4 @@ class UpdateAccountSchema(Schema):
     email: Optional[str] = None
     merchant_address: Optional[str]
     username: Optional[str] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
     password: Optional[str] = None

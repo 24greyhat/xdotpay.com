@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     "authentication",
+    "api_v1"
 ]
 
 
@@ -142,6 +143,7 @@ STATIC_URL = 'static/'
 
 CORS_ALLOWED_ORIGINS = env_config(
     "ALLOWED_ORIGINS", cast=str, default=" ").split()
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = "*"
 

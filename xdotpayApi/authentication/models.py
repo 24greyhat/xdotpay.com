@@ -16,6 +16,9 @@ class Account(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    first_name = None
+    last_name = None
+
     USERNAME_FIELD = "email"
 
     REQUIRED_FIELDS = ["username"]
