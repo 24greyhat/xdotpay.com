@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { FormInput } from './FormInput';
+import Link from 'next/link';
 
 interface SignupFormProps {
   onSignup: () => void;
 }
+
 
 export function SignupForm({ onSignup }: SignupFormProps) {
   const [formData, setFormData] = useState({
@@ -114,7 +115,7 @@ export function SignupForm({ onSignup }: SignupFormProps) {
       <div className="text-center">
         <p className="text-gray-600">
           Already have an account?{' '}
-          <Link to="/login" className="text-indigo-600 hover:text-indigo-700">
+          <Link href="/login" className="text-indigo-600 hover:text-indigo-700">
             Sign in
           </Link>
         </p>
