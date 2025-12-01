@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config as env_config
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1quzwli+%9y(x34hlc78gait0w@jd#ie%6a3amfeig1521)@4n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_config("ALLOWED_HOSTS", cast=str, default="").split(",")
 
 
 # Application definition
@@ -95,13 +96,18 @@ WSGI_APPLICATION = 'xdotpayApi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# only add the postgresql url if its defined in the env
+if env_config("DATABASE_URL", cast=str, default="") != "":
+    DATABASES['default'] = dj_database_url.parse(
+        env_config("DATABASE_URL", cast=str, default=""))
 
 
 # Password validation

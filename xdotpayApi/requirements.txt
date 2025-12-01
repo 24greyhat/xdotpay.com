@@ -7,3 +7,6 @@ djangorestframework
 django-filter
 markdown
 pydantic
+dj-database-url
+psycopg2-binary
+pyyaml
