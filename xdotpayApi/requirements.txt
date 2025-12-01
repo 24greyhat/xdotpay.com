@@ -12,3 +12,4 @@ psycopg2-binary
 pyyaml
 gunicorn
 django_user_agents
+dateutil
