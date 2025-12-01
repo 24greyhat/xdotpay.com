@@ -490,7 +490,7 @@ export default function Home() {
                 </p>
 
                 <CodeBlock
-                  code={`curl -X POST https://api.xdotpay.com/api/v1/invoices \\
+                  code={`curl -X POST https://api.xdotpay.com/api/v1/new/invoice \\
   -H "Authorization: Bearer YOUR_API_TOKEN" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -520,8 +520,7 @@ export default function Home() {
                 </p>
 
                 <CodeBlock
-                  code={`curl -X GET https://api.yourapp.com/api/v1/invoices/:invoice_id \\
-  -H "Authorization: Bearer YOUR_API_TOKEN"`}
+                  code={`curl -X GET https://api.xdotpay.com/api/v1/view/invoice?invoice_id={id}`}
                   id="view-invoice"
                 />
 
@@ -543,26 +542,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Submit Payment */}
-              <div className="mb-8">
-                <h3 className="mb-3 text-white">Submit Payment Confirmation</h3>
-                <p className="text-gray-400 mb-4">
-                  Once a customer pays, submit the transaction details:
-                </p>
-
-                <CodeBlock
-                  code={`curl -X POST https://api.yourapp.com/api/v1/payments \\
-  -H "Authorization: Bearer YOUR_API_TOKEN" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "invoice_id": 1,
-    "from_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb1",
-    "tx_hash": "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f"
-  }'`}
-                  id="payment"
-                />
-              </div>
-
               {/* Full Docs Link */}
               <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-700 rounded-lg p-6">
                 <h3 className="text-indigo-300 mb-2">Complete API Documentation</h3>
@@ -570,7 +549,7 @@ export default function Home() {
                   View the full API reference with detailed information about all endpoints, parameters, and response formats.
                 </p>
                 <a
-                  href="https://docs.yourapp.com/api"
+                  href="https://api.xdotpay.com/api/docs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
