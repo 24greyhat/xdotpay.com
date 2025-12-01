@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { DollarSign, Wallet, Mail, Lock, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '../../config/env';
+import { toast } from 'sonner';
 
 
 
@@ -29,8 +30,6 @@ export default function SignupPage() {
     return /^0x[a-fA-F0-9]{40}$/.test(address);
   };
 
-
-  console.log(API_URL)
 
   const handleSignup = async () => {
     const newErrors = {};
@@ -72,9 +71,11 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Signup successful:', data);
+        toast.success("Signed up successfully");
+        router.push("/login");
+
       } else {
-        setErrors({ general: data.message || 'Signup failed. Please try again.' });
+        setErrors({ general: data.detail || 'Signup failed. Please try again.' });
       }
     } catch (error) {
       console.error('Signup error:', error);

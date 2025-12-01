@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.db import IntegrityError
 from ninja import File, Form, Router, UploadedFile
+from authentication.models import Account
 from helpers.api import Auth
 from .schemas import LoginSchema, SignupSchema, AccountSchema, ViewAccountSchema, UpdateAccountSchema
 from rest_framework.authentication import TokenAuthentication, authenticate
@@ -41,7 +42,7 @@ def signup(request, data: SignupSchema):
                 400, 'This email is already associated with an account!')
         raise HttpError(400, 'This username taken!')
 
-    except Exception:
+    except KeyboardInterrupt:
         raise HttpError(400, "An error occurred, please try again!")
 
 

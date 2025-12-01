@@ -1,7 +1,9 @@
+from typing import List
+from django.db.models import Sum
 from ninja import Router
 from ninja.errors import HttpError
 from api_v1.models import Invoice, PaymentStatus
-from api_v1.schemas import NewInvoiceSchema, PaymentSchema, ViewInvoiceSchema
+from api_v1.schemas import NewInvoiceSchema, PaymentSchema, StatsSchema, ViewInvoiceSchema
 from authentication.models import Account
 from helpers.api import Auth
 from decouple import config as env_config
@@ -33,7 +35,7 @@ def newInvoice(request, data: NewInvoiceSchema):
     try:
         data = data.dict()
 
-        data['merchant'] = Account.objects.get(username=data['merchant'])
+        data['merchant'] = request.auth
 
         data['status'] = PaymentStatus.PENDING
 
@@ -65,8 +67,8 @@ def viewInvoice(request, id: int):
     return invoice
 
 
-@router.get("/view/invoices", tags=["PAYMENT GATEWAY"], auth=Auth(), response=ViewInvoiceSchema)
-def viewInvoices(request, skip: int = 0, limit: int = 10):
+@router.get("/view/invoices", tags=["PAYMENT GATEWAY"], auth=Auth(), response=List[ViewInvoiceSchema])
+def viewInvoices(request, skip: int = 0, limit: int = 100):
     '''
     # View Invoices
 
@@ -74,28 +76,46 @@ def viewInvoices(request, skip: int = 0, limit: int = 10):
 
     '''
 
-    invoices = Invoice.objects.all().filter(merchant=request.auth)
+    invoices = Invoice.objects.all().filter(
+        merchant=request.auth).order_by("-created_at")
 
     return invoices[skip:limit]
 
 
-@router.get("/view/revenue", tags=["PAYMENT GATEWAY"], auth=Auth())
-def viewRevenue(request, skip: int = 0, limit: int = 10):
+@router.get("/view/stats", tags=["PAYMENT GATEWAY"], auth=Auth(), response=StatsSchema)
+def viewStats(request):
     '''
-    # View Revenue
+    # View Stats
 
-    > This endpoint will return all revenue belonging to this merchant.
+    > This endpoint will return all the stats necessary for the dashboard (invoices, revenue, completed, pending)
 
     '''
 
-    invoices = Invoice.objects.all().filter(merchant=request.auth)
+    invoices = Invoice.objects.all().filter(
+        merchant=request.auth, status=PaymentStatus.CONFIRMED)
 
-    sum_result = invoice.aggregate(total_amount=Sum('amount'))
+    sum_result = Invoice.objects.all().filter(
+        merchant=request.auth, status=PaymentStatus.CONFIRMED).aggregate(total_amount=Sum('amount'))
 
-    return {"revenue": (sum_result - (sum_result*0.1)), "count": invoices.count()}
+    sum_result = sum_result['total_amount']
+
+    if sum_result == None:
+        sum_result = 0
+
+    revenue = (float(sum_result) - (float(sum_result)*0.1))
+
+    total = Invoice.objects.all().filter(merchant=request.auth).count()
+
+    pending = Invoice.objects.all().filter(
+        merchant=request.auth, status=PaymentStatus.PENDING).count()
+
+    completed = Invoice.objects.all().filter(
+        merchant=request.auth, status=PaymentStatus.CONFIRMED).count()
+
+    return {"invoices": total, "revenue": revenue, "pending": pending, "completed": completed}
 
 
-@router.post("/pay/invoice", tags=["PAYMENT GATEWAY"], response=ViewInvoiceSchema)
+@ router.post("/pay/invoice", tags=["PAYMENT GATEWAY"], response=ViewInvoiceSchema)
 def payInvoice(request, data: PaymentSchema):
     '''
     # Pay Invoice
@@ -124,7 +144,7 @@ def payInvoice(request, data: PaymentSchema):
 
 
 @router.get("/verify", tags=["PAYMENT GATEWAY"])
-def verify_payment(request, invoice_id: int):
+def verify_payment(request, invoice_id: int, tx_hash: str):
 
     payment = Invoice.objects.get(id=invoice_id)
 

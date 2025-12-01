@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { DollarSign, Wallet, Mail, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { API_URL } from '../../config/env';
+import { setToken } from '../../config/auth';
 
 
 
@@ -34,7 +36,7 @@ export default function LoginPage() {
     setErrors({});
 
     try {
-      const response = await fetch('https://api.yourapp.com/api/v1/auth/login', {
+      const response = await fetch(API_URL + 'auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,10 +50,11 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (response.ok) {
-        console.log('Login successful:', data);
-        // Store token or user data here
-        localStorage.setItem('authToken', data.token);
-        onLogin();
+
+        setToken(data.token);
+
+        return router.push("/");
+
       } else {
         setErrors({ general: data.message || 'Login failed. Please check your credentials.' });
       }
@@ -61,7 +64,8 @@ export default function LoginPage() {
       console.log('Mock login data:', {
         email: formData.email
       });
-      onLogin();
+
+
     } finally {
       setLoading(false);
     }
