@@ -8,31 +8,29 @@
 
 <div align="center">
 
-# 🚀 **Xdopay Compliance Statement**
+# 🟩 Xdopay — Non-Custodial • Open Source • Not a VASP
 
-### 🟩 We Are **Not a VASP**  
-**Xdopay is a fully non-custodial payment protocol.**  
-We **never hold**, **control**, or **intermediate** user funds.  
-All payments flow **directly from payer → merchant wallet**.
+### 💡 Open-Source Software  
+Xdopay is an **open-source, non-custodial payment protocol**.  
+Anyone can run the code — we do **not operate a custodial service**.
 
----
+### 🔐 Zero Custody  
+We never hold or control private keys, wallets, or user funds.  
+Payments occur **directly between payer and merchant wallets**.
 
-### 🔗 **Smart-Contract Fee Routing**  
-Our protocol fees are collected **automatically** via an on-chain  
-**smart-contract fee-split**, where merchants pre-approve the fee.  
-The contract **routes the fee** directly to the protocol wallet —  
-**no custody, no handling, no intervention** by Xdopay.
+### 🔗 Smart-Contract Fee Splits  
+Protocol fees are collected automatically by an auditable  
+**on-chain fee-split smart contract**, routing a predefined  
+merchant-approved fee directly to the protocol address.
 
----
-
-### 🛡️ **Pure Software. Zero Financial Intermediation.**  
-Xdopay provides **software tools**, not financial services.  
-We do **not** operate as a Virtual Asset Service Provider (VASP)  
-under any custodial, exchange, remittance, or brokerage definition.
+### 🛡️ Not a Virtual Asset Service Provider  
+Xdopay provides **software**, not financial services.  
+We do **not** provide custody, exchange, remittance, settlement,  
+or any regulated Virtual Asset Service under UAE frameworks.
 
 ---
 
-**✨ 100% Non-Custodial • On-Chain • Transparent • Compliant**
+**✨ 100% Open Source • Transparent • Non-Custodial**
 
 </div>
 
