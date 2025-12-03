@@ -168,7 +168,7 @@ curl -X GET "https://api.xdotpay.com/api/v1/verify?invoice_id=1&tx_hash=0xabc123
 
 The API verifies the transaction on the Ethereum blockchain and confirms the payment.
 
-**Note:** To see this in action, spin up the frontend locally and see how i implemented the frontend side of the payment handling.
+**Note:** To see this in action, spin up the **dashboard** locally and see how i implemented the frontend side of the payment handling.
 
 ---
 
