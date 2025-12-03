@@ -114,7 +114,7 @@ git clone https://github.com/24greyhat/xdotpay.com.git
 cd xdotpay.com/frontend
 ```
 
-2. **Create `.env.local` file**:
+2. **Create `.env` file**:
 ```env
 NEXT_PUBLIC_API_URL=https://api.xdotpay.com/api/
 ```
