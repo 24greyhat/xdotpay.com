@@ -122,7 +122,7 @@ NEXT_PUBLIC_API_URL=https://api.xdotpay.com/api/
 3. **Install dependencies and run**
 ```bash
 npm install
-npm run dev
+npx next dev --turbo
 ```
 
 Visit the setup guides at **[https://xdotpay.com](https://xdotpay.com)** for detailed instructions.
