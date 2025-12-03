@@ -88,8 +88,8 @@ Access the OpenAPI spec at **[https://api.xdotpay.com/api/docs](https://api.xdot
 
 1. **Clone the repository**
 ```bash
-git clone <your-backend-repo>
-cd xdotpay-api
+git clone https://github.com/24greyhat/xdotpay.com.git
+cd xdotpay.com/xdotpayApi
 ```
 
 2. **Create `.env` file** with required variables:
@@ -109,14 +109,14 @@ python manage.py runserver
 ### Frontend Setup (Next.js Dashboard)
 
 1. **Clone the repository**
-```bash
-git clone <your-frontend-repo>
-cd xdotpay-dashboard
+```bash 
+git clone https://github.com/24greyhat/xdotpay.com.git
+cd xdotpay.com/frontend
 ```
 
 2. **Create `.env.local` file**:
 ```env
-NEXT_PUBLIC_API_URL=https://api.xdotpay.com
+NEXT_PUBLIC_API_URL=https://api.xdotpay.com/api/
 ```
 
 3. **Install dependencies and run**
