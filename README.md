@@ -111,7 +111,7 @@ python manage.py runserver
 1. **Clone the repository**
 ```bash 
 git clone https://github.com/24greyhat/xdotpay.com.git
-cd xdotpay.com/frontend
+cd xdotpay.com/dashboard
 ```
 
 2. **Create `.env` file**:
