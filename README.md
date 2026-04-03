@@ -1,6 +1,8 @@
-# XDotPay - Non-Custodial USDC Payment API
+# Abandoned project (fintech is too regulated for my liking but i tried!)
 
 > **Transparent. Open Source. Non-Custodial.**
+
+
 
 XDotPay is a payment gateway API for accepting USDC cryptocurrency payments. We are **NOT a Virtual Asset Service Provider (VASP)** - we don't intercept, hold, or control funds. All payments go directly from payer to merchant's wallet.
 
